@@ -1,0 +1,4 @@
+Fighter
+9
+false
+1
