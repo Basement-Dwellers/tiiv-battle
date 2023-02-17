@@ -1,12 +1,32 @@
+EXEC = battle.out
+DIRS = tiiv .
+
 CXX = g++
-SOURCE = ./tiiv/shipType.cpp ./tiiv/buildData.cpp ./tiiv/ship.cpp ./tiiv/fleet.cpp ./tiiv/engine.cpp main.cpp
+CXXFLAGS_OPT = -O
+CXXFLAGS_DEBUG = -g
+SOURCE := $(foreach dir, $(DIRS), $(wildcard $(dir)/*.cpp))
 OBJ = $(patsubst %.cpp, %.o, $(SOURCE))
 
-%.o : %.cpp
-	$(CXX) -c $< -o $@
+.PHONY: debug opt clean test
 
-battle.out: $(OBJ)
-	$(CXX) -o $@ $^
+%.o : %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+ifeq "$(MAKECMDGOALS)" "opt"
+CXXFLAGS = $(CXXFLAGS_OPT)
+else
+CXXFLAGS = $(CXXFLAGS_DEBUG)
+endif
+
+debug: $(EXEC)
+
+opt: $(EXEC)
+	
+$(EXEC): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean:
 	rm -f $(OBJ) battle.out
+
+test: $(EXEC)
+	@./$(EXEC) -p -s Fighter 6 -p -s Cruiser 3
