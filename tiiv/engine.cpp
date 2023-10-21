@@ -42,6 +42,6 @@ namespace tiiv {
             }
         }
         Fleet[] fleets = {fleet1, fleet2};
-        return;
+        return Fleet[];
     }
 }
