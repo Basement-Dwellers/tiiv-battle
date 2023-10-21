@@ -88,11 +88,11 @@ int main(int argc, char *argv[]) {
 
     //run simulation
     int p1wins = 0;
-    int p2winds = 0;
+    int p2wins = 0;
     int draws = 0;
 
     if(runCount > 1){
-        for(int 1 = 0; i < runCount; i++){
+        for(int i = 0; i < runCount; i++){
             tiiv::buildData data(fleetCounts);
             tiiv::engine battleEngine(data);
             std::vector<tiiv::Fleet> fightResults = battleEngine.runFight(types);
