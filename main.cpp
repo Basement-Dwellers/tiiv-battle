@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
             if (p < 1) {
                 p++;
             } else {
-                std::cout << "negative or zero number of ship types not supported\n";
+                std::cout << "more than two players is not supported\n";
                 return 2;
             }
         } else if (isInt(args[i])) {
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
             if (i + 3 > args.size()) {
                 std::cout << "too few arguments\n";
                 return 4;
-            } else if(isInt(args[i+2])) {
+            } else if(!(isInt(args[i+2]))) {
                 std::cout << "invalid syntax\n";
                 return 1;
             } else if (shipNames.find(args[i+1]) == shipNames.end()) {
