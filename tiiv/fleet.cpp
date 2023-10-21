@@ -24,7 +24,7 @@ namespace tiiv {
         return;
     }
 
-    Fleet::Fleet(Fleet f){
+    Fleet::Fleet(const Fleet& f){
         Ship *p = f.getFleetTop();
         Ship *s = this->getFleetTop();
         if(p){
