@@ -9,9 +9,6 @@ namespace tiiv {
         Fleet fleet1;
         Fleet fleet2;
 
-        // std::cout << b_.getFleetData(1).at(0) << std::endl;
-        // std::cout << b_.getFleetData(1).at(1) << std::endl;
-        // std::cout << b_.getFleetData(1).at(2) << std::endl;
         for (int i = 0; i < b_.getFleetData(1).size(); i++) {
 
             for (int j = 0; j < b_.getFleetData(1)[i]; j++) {
