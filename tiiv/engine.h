@@ -9,7 +9,7 @@ namespace tiiv {
     class engine {
         public:
             engine(buildData data);
-            Fleet[] runFight(std::vector<shipType> types);
+            std::vector<Fleet> runFight(std::vector<shipType> types);
         private:
             buildData b_;
     };
