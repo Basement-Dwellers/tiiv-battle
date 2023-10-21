@@ -87,6 +87,8 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
+//get ship types from ships folder
+//assumed this syntax is done correctly
 std::vector<tiiv::shipType> generateShipTypes() {
     std::vector<tiiv::shipType> shipTypeVector;
     for (const auto& dirEntry : std::filesystem::recursive_directory_iterator("ships")) {
