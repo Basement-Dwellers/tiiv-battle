@@ -7,7 +7,7 @@ namespace tiiv {
             armoredShipsLeft_ = true;
         }
         Ship *newShip = new Ship(ship_type);
-        Ship* p = fleetTop_;
+        Ship *p = fleetTop_;
         while (p) {
             if (newShip->getToHit() >= p->getToHit()) {
                 newShip->next = p->next;
@@ -22,6 +22,22 @@ namespace tiiv {
             fleetTop_ = newShip;
         }
         return;
+    }
+
+    Fleet::Fleet(Fleet f){
+        Ship *p = f.getFleetTop();
+        Ship *s = this->getFleetTop();
+        if(p){
+            this->getFleetTop() = new Ship(*p);
+            this->getFleetTop()->next = nullptr;
+            p = p->next;
+        }
+        while(p){
+            s->next = new Ship(*p);
+            s = s->next;
+            s->next = nullptr;
+            p = p->next;
+        }
     }
 
     Fleet::~Fleet() {
