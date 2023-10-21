@@ -47,9 +47,9 @@ int main(int argc, char *argv[]) {
     }
 
     int runCount = 1;
-    if(args.size() > 2 && args[1] = "-r"){
+    if(args.size() > 2 && args[1] == "-r"){
         if(isInt(args[2]) && args[2] > 0){
-            runcount = args[2];
+            runCount = args[2];
         } else {
             std::cout << "run count syntax invalid\n";
             return 1;
