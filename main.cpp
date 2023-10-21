@@ -47,10 +47,6 @@ int main(int argc, char *argv[]) {
     }
 
     //build fleetcounts and check for syntax errors
-    if(args[0] != "-p"){
-        std::cout << "invalid syntax\n";
-        return 1;
-    }
     for (int i = 0, p = -1; i < args.size(); i++) {
         if (args[i] == "-p") {
             if (p < 1) {
