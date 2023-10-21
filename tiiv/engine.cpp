@@ -30,7 +30,6 @@ namespace tiiv {
         while(fleet1.getFleetTop() && fleet2.getFleetTop()){
             int damage1 = fleet1.attack();
             int damage2 = fleet2.attack();
-            //std::cout << "Fleet 1 Hits: " << damage1 << " Fleet 2 Hits: " << damage2 << std::endl;
             for(int i = 0; i < damage1; i++){
                 fleet2.removeShip();
             }
