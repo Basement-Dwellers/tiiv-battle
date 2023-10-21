@@ -12,12 +12,16 @@
 #include <random>
 #include <ctime>
 
+//initialize ship types and list available options
 std::vector<tiiv::shipType> generateShipTypes();
 void printShipTypes(std::vector<tiiv::shipType> shipTypeVector);
 bool isInt(std::string s);
 
 int main(int argc, char *argv[]) {
+    //reset random library seed
     srand(time(0));
+
+    //create a vector of 2 vectors holding the shiptypes
     std::vector<tiiv::shipType> types = generateShipTypes();
     printShipTypes(types);
     std::unordered_map<std::string, int> shipNames;
@@ -25,6 +29,7 @@ int main(int argc, char *argv[]) {
     fleetCounts.push_back({});
     fleetCounts.push_back({});
     
+    //set the amount of all the shiptypes in each vector to 0
     for(int i = 0, s = types.size(); i < s; i++) {
         fleetCounts[0].push_back(0);
         fleetCounts[1].push_back(0);
@@ -33,39 +38,53 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < types.size(); i++) {
         shipNames[types[i].getName()] = i;
     }
-    
+
+    //create a vector of strings from the args    
     std::vector<std::string> args;
     for (int i = 0; i < argc; i++) {
         std::string s = argv[i];
         args.push_back(s);
     }
 
+    //build fleetcounts and check for syntax errors
+    if(args[0] != "-p"){
+        std::cout << "invalid syntax\n";
+        return 1;
+    }
     for (int i = 0, p = -1; i < args.size(); i++) {
         if (args[i] == "-p") {
             if (p < 1) {
                 p++;
             } else {
-                //Scream and die
+                std::cout << "negative or zero number of ship types not supported\n";
+                return 2;
             }
         } else if (isInt(args[i])) {
-            if (i > 0) {
-                
+            if (i < 0) {
+                std::cout << "negative or zero number of ships not supported\n";
+                return 3;
             }
         } else if (args[i] == "-s") {
             if (i + 3 > args.size()) {
-                //Scream and die
+                std::cout << "too few arguments\n";
+                return 4;
+            } else if(isInt(args[i+2])) {
+                std::cout << "invalid syntax\n";
+                return 1;
             } else if (shipNames.find(args[i+1]) == shipNames.end()) {
-                //Scream and die
+                std::cout << "ship type " << args[i+1] << " not supported\n";
+                return 6;
             } else {
                 fleetCounts.at(p).at(shipNames[args[i+1]]) = std::stoi(args[i+2]);
             }
         }
     }
 
+    //run simulation
     tiiv::buildData data(fleetCounts);
     tiiv::engine battleEngine(data);
     battleEngine.runFight(types);
-    
+    return 0;
 }
 
 std::vector<tiiv::shipType> generateShipTypes() {
@@ -114,4 +133,3 @@ bool isInt(std::string s) {
     }
     return true;
 }
-
