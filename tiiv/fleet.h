@@ -5,6 +5,7 @@
 namespace tiiv {
     class Fleet {
     public:
+        Fleet(Fleet f);
         ~Fleet();
 
         int attack();
