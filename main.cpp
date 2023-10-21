@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < types.size(); i++) {
         shipNames[types[i].getName()] = i;
     }
-
+    
     //create a vector of strings from the args    
     std::vector<std::string> args;
     for (int i = 0; i < argc; i++) {
@@ -46,6 +46,16 @@ int main(int argc, char *argv[]) {
         args.push_back(s);
     }
 
+    int runCount = 1;
+    if(args.size() > 2 && args[1] = "-r"){
+        if(isInt(args[2]) && args[2] > 0){
+            runcount = args[2];
+        } else {
+            std::cout << "run count syntax invalid\n";
+            return 1;
+        }
+    }
+    
     //build fleetcounts and check for syntax errors
     for (int i = 0, p = -1; i < args.size(); i++) {
         if (args[i] == "-p") {
@@ -77,10 +87,33 @@ int main(int argc, char *argv[]) {
     }
 
     //run simulation
+    int p1wins = 0;
+    int p2winds = 0;
+    int draws = 0;
+
+    if(runCount > 1){
+        for(int 1 = 0; i < runCount; i++){
+            tiiv::buildData data(fleetCounts);
+            tiiv::engine battleEngine(data);
+            std::vector<tiiv::Fleet> fightResults = battleEngine.runFight(types);
+        
+            tiiv::Fleet fleet1 = fightResults.at(0);
+            tiiv::Fleet fleet2 = fightResults.at(1);
+            if(!fleet1.getFleetTop() && !fleet2.getFleetTop()){
+                draws++;
+            } else if(fleet1.getFleetTop()){
+                p1wins++;
+            } else {
+                p2wins++;
+            }
+        }
+        std::cout << "\nFleet 1 wins: " << p1wins << "\nFleet 2 wins: " << p2wins << "\nDraws: " << draws << std::endl;
+        return 0;
+    }
     tiiv::buildData data(fleetCounts);
     tiiv::engine battleEngine(data);
     std::vector<tiiv::Fleet> fightResults = battleEngine.runFight(types);
-
+        
     tiiv::Fleet fleet1 = fightResults.at(0);
     tiiv::Fleet fleet2 = fightResults.at(1);
     tiiv::Ship* p;
