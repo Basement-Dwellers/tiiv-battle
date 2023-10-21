@@ -38,6 +38,7 @@ namespace tiiv {
             s->next = nullptr;
             p = p->next;
         }
+        this->armoredShipsLeft_ = f.armoredShipsLeft_;
     }
 
     Fleet::~Fleet() {
