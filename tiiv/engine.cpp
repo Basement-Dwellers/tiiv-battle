@@ -5,7 +5,7 @@ namespace tiiv {
     engine::engine(buildData data) {
         b_ = data;
     }
-    vector<Fleet> engine::runFight(std::vector<shipType> types){
+    std::vector<Fleet> engine::runFight(std::vector<shipType> types){
         Fleet fleet1;
         Fleet fleet2;
 
@@ -37,7 +37,7 @@ namespace tiiv {
                 fleet1.removeShip();
             }
         }
-        vector<Fleet> fleets = {fleet1, fleet2};
+        std::vector<Fleet> fleets = {fleet1, fleet2};
         return fleets;
     }
 }
