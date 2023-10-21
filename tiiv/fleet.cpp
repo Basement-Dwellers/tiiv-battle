@@ -25,11 +25,11 @@ namespace tiiv {
     }
 
     Fleet::Fleet(const Fleet& f){
-        Ship *p = f.getFleetTop();
-        Ship *s = this->getFleetTop();
+        Ship *p = f.fleetTop_;
+        Ship *s = this->fleetTop_;
         if(p){
-            this->getFleetTop() = new Ship(*p);
-            this->getFleetTop()->next = nullptr;
+            this->fleetTop_ = new Ship(*p);
+            this->fleetTop_->next = nullptr;
             p = p->next;
         }
         while(p){
