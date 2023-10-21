@@ -5,6 +5,7 @@
 namespace tiiv {
     class Fleet {
     public:
+        Fleet(){armoredShipsLeft_ = false};
         Fleet(Fleet f);
         ~Fleet();
 
