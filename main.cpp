@@ -79,7 +79,29 @@ int main(int argc, char *argv[]) {
     //run simulation
     tiiv::buildData data(fleetCounts);
     tiiv::engine battleEngine(data);
-    battleEngine.runFight(types);
+    std::vector<tiiv::Fleet> fightResults = battleEngine.runFight(types);
+
+    tiiv::Fleet fleet1 = fightResults.at(0);
+    tiiv::Fleet fleet2 = fightResults.at(1);
+    tiiv::Ship* p;
+        if(!fleet1.getFleetTop() && !fleet2.getFleetTop()){
+            std::cout << "Draw\n";
+            p = nullptr;
+        } else if(fleet1.getFleetTop()){
+            p = fleet1.getFleetTop();
+            std::cout << "Fleet 1 Wins. Remaining Ships:\n";
+            
+        } else {
+            p = fleet2.getFleetTop();
+            std::cout << "Fleet 2 Wins. Remaining Ships:\n";
+        }
+        while(p){
+            std::cout << "  " << p->getName();
+            if (p->getShipType().getArmored()) std::cout << " | Armor Status: " << std::boolalpha << p->getArmor();
+            std::cout << std::endl;
+            if(p->next) p = p->next;
+            else break;
+        }
     return 0;
 }
 
@@ -129,25 +151,5 @@ bool isInt(std::string s) {
             return false;
         }
     }
-
-    tiiv::Ship* p;
-        if(!fleet1.getFleetTop() && !fleet2.getFleetTop()){
-            std::cout << "Draw\n";
-            p = nullptr;
-        } else if(fleet1.getFleetTop()){
-            p = fleet1.getFleetTop();
-            std::cout << "Fleet 1 Wins. Remaining Ships:\n";
-            
-        } else {
-            p = fleet2.getFleetTop();
-            std::cout << "Fleet 2 Wins. Remaining Ships:\n";
-        }
-        while(p){
-            std::cout << "  " << p->getName();
-            if (p->getShipType().getArmored()) std::cout << " | Armor Status: " << std::boolalpha << p->getArmor();
-            std::cout << std::endl;
-            if(p->next) p = p->next;
-            else break;
-        }
     return true;
 }
