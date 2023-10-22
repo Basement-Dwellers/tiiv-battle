@@ -1,3 +1,4 @@
+//This class is a linked list that holds each ship as an individual object
 #include "fleet.h"
 #include <iostream>
 
@@ -51,6 +52,7 @@ namespace tiiv {
         }
     }
 
+    //This function will prioritize damaging armored ships before destroying whole ships
     void Fleet::removeShip() {
         if (!armoredShipsLeft_ && fleetTop_) {
             Ship *p = fleetTop_->next;
