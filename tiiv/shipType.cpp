@@ -1,13 +1,14 @@
+//This class takes in the values from the ships folder and creates a template for engine and fleet to build ships from
 #include "shipType.h"
 #include <string>
 
 namespace tiiv{
 
     shipType::shipType() {
-        name_ = "Fighter";
-        toHitValue_ = 9;
+        name_ = "";
+        toHitValue_ = 0;
         armored_ = false;
-        attackRolls_ = 1;
+        attackRolls_ = 0;
     }
 
     shipType::shipType(std::string name, int toHitValue, bool armored, int attackRolls) {
