@@ -1,3 +1,6 @@
+//This class's function is to store the inital quantities of ships of each fleet
+//This is then exported to engine to build the fleets
+
 #include "buildData.h"
 
 namespace tiiv {
